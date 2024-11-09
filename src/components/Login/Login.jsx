@@ -1,4 +1,7 @@
-import { GoogleAuthProvider, signInWithPopup, signOut, GithubAuthProvider } from "firebase/auth";
+import {
+    GoogleAuthProvider, signInWithPopup,
+    signOut, GithubAuthProvider, createUserWithEmailAndPassword
+} from "firebase/auth";
 import { auth } from "../Firebase/firebase";
 import { useState } from "react";
 
@@ -46,8 +49,25 @@ export default function Login() {
             console.error("Error signing out", error);
         });
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                setUser(result.user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("ERROR", errorCode, errorMessage)
+                setUser(null);
+            });
+    }
     return (
         <div className="hero bg-base-200 min-h-screen">
+
 
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="w-full">
@@ -62,30 +82,32 @@ export default function Login() {
                     }
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form className="card-body">
+                    <form className="card-body" onSubmit={handleSubmit}>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered" required />
+                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="password" className="input input-bordered" required />
+                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary" onClick={handleClick}>Login with google</button>
-                            <button className="btn btn-primary mt-2" onClick={handleClickGithub}>Login with github</button>
+                            <button className="btn btn-primary" > Login</button>
+
+                            <button className="btn btn-secondary mt-2" onClick={handleClick}>Login with google</button>
+                            <button className="btn btn-success mt-2 " onClick={handleClickGithub}>Login with github</button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 }

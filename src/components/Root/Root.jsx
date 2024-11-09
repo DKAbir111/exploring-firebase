@@ -8,7 +8,6 @@ export default function Root() {
             <Navbar />
             <Outlet />
             <Footer />
-            <p className="btn btn-primary">button</p>
         </div>
     )
 }

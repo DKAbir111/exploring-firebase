@@ -6,8 +6,6 @@ import { auth } from "../Firebase/firebase";
 import { useState } from "react";
 
 
-
-
 export default function Login() {
     const provider = new GoogleAuthProvider();
     const gitProvider = new GithubAuthProvider();
@@ -66,48 +64,48 @@ export default function Login() {
             });
     }
     return (
-        <div className="hero bg-base-200 min-h-screen">
 
 
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="w-full">
-                    {
-                        user && <div>
 
-                            <h3>Name:{user.displayName}</h3>
-                            <h3>Email:{user.email}</h3>
-                            <img src={user.photoURL} alt="img" />
-                            <button className="btn btn-primary mt-2" onClick={handleLogOut}>Log Out</button>
-                        </div>
-                    }
-                </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form className="card-body" onSubmit={handleSubmit}>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
-                        </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-primary" > Login</button>
+        <div>
+            <div className="w-full">
+                {
+                    user && <div>
 
-                            <button className="btn btn-secondary mt-2" onClick={handleClick}>Login with google</button>
-                            <button className="btn btn-success mt-2 " onClick={handleClickGithub}>Login with github</button>
-                        </div>
-                    </form>
-                </div>
-            </div >
+                        <h3>Name:{user.displayName}</h3>
+                        <h3>Email:{user.email}</h3>
+                        <img src={user.photoURL} alt="img" />
+                        <button className="btn btn-primary mt-2" onClick={handleLogOut}>Log Out</button>
+                    </div>
+                }
+            </div>
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto my-10">
+                <form className="card-body" onSubmit={handleSubmit}>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Email</span>
+                        </label>
+                        <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Password</span>
+                        </label>
+                        <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                        <label className="label">
+                            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                        </label>
+                    </div>
+                    <div className="form-control mt-6">
+                        <button className="btn btn-primary" > Login</button>
 
+                        <button className="btn btn-secondary mt-2" onClick={handleClick}>Login with google</button>
+                        <button className="btn btn-success mt-2 " onClick={handleClickGithub}>Login with github</button>
+                    </div>
+                </form>
+            </div>
         </div >
+
+
     )
 }
